@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+  <title>Info</title>
+  <link rel="stylesheet" href="assets/main.css"/>
+  <script src="assets/javascripts/jquery.min.js"></script>
+  <script src="assets/javascripts/mustache.min.js"></script>
+
+</head>
+
+  <body>
+    <header>
+      <% include partials/nav.ejs %>
+    </header>
+
+    <div id="everything">
+      <div id="info">
+        <h2 class="characterTitle"><%= chara.name %></h2><br>
+        <h4 class="characterBasicInfoTitle"><%= chara.size %>, <%= chara.type %>, <%= chara.alignment %></h4><br>
+        <br>
+        <h4 class="characterBasicInfoTitle">Armor Class: </h4><p class="characterBasicInfo"><%= chara.armor_class %></p><br>
+        <h4 class="characterBasicInfoTitle">Hit Points: </h4><p class="characterBasicInfo"><%= chara.hit_points %></p><br>
+        <h4 class="characterBasicInfoTitle">Speed: </h4><p class="characterBasicInfo"><%= chara.speed %></p><br>
+        <br>
+
+        <table class="statDiv">
+          <thead>
+            <th class="statsTitle">Str</th>
+            <th class="statsTitle">Dex</th>
+            <th class="statsTitle">Con</th>
+            <th class="statsTitle">Int</th>
+            <th class="statsTitle">Wis</th>
+            <th class="statsTitle">Cha</th>
+          </thead>
+          <tbody>
+            <td class="statsValue"><%= chara.strength %></td>
+            <td class="statsValue"><%= chara.dexterity %></td>
+            <td class="statsValue"><%= chara.constitution %></td>
+            <td class="statsValue"><%= chara.intelligence %></td>
+            <td class="statsValue"><%= chara.wisdom %></td>
+            <td class="statsValue"><%= chara.charisma %></td>
+          </tbody>
+        </table><br>
+
+        <h4 class="characterBasicInfoTitle">Senses: </h4>
+        <p class="characterBasicInfo"><%= chara.senses %></p><br>
+
+        <h4 class="characterBasicInfoTitle">Languages: </h4>
+        <p class="characterBasicInfo"><%= chara.languages %></p><br>
+
+        <h4 class="characterBasicInfoTitle">Challenge: </h4>
+        <p class="characterBasicInfo"><%= chara.challenge_rating %></p><br>
+
+        <h4 class="characterBasicInfoTitle">Immunities: </h4>
+        <p class="characterBasicInfo"><%= chara.immunities %></p><br>
+
+        <h2 class="characterTitle">Special Abilities</h2><br>
+        <% chara.special_abilities.forEach(function(element){ %>
+          <h4 class="actionTitle"><%= element.name %></h4>
+          <p class="actionInfo"><%= element.desc %></p>
+        <% }); %>
+
+
+        <h2 class="characterTitle">Actions</h2><br>
+        <% chara.actions.forEach(function(element){ %>
+          <h4 class="actionTitle"><%= element.name %></h4>
+          <p class="actionInfo"><%= element.desc %></p>
+        <% }); %><br>
+
+        <form action="/" class="backButton">
+          <input type="submit" value="Back" />
+        </form>
+      </div>
+    </div>
+
+    <footer>
+      <h3>©My Site 2019</h3>
+    </footer>
+  </body>
+</html>

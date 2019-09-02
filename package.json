@@ -1,0 +1,24 @@
+{
+  "name": "infomanager",
+  "version": "1.0.0",
+  "description": "Allows user to input and organize data. User can create categories and save info within those categories.",
+  "main": "homepage/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node homepage/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SachJay/InfoManager.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SachJay/InfoManager/issues"
+  },
+  "homepage": "https://github.com/SachJay/InfoManager#readme",
+  "dependencies": {
+    "ejs": "^2.6.2",
+    "express": "^4.17.1"
+  }
+}
