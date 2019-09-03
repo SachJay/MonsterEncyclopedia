@@ -19,7 +19,7 @@
         <h2 class="characterTitle"><%= chara.name %></h2><br>
         <h4 class="characterBasicInfoTitle"><%= chara.size %>, <%= chara.type %>, <%= chara.alignment %></h4><br>
         <br>
-        
+
         <% displayInfo(chara.armor_class, "Armor Class") %>
         <% displayInfo(chara.hit_points, "Hit Points") %>
         <% displayInfo(chara.speed, "Speed") %>
@@ -56,9 +56,9 @@
         <% displayAllActions(chara.actions, "Actions"); %>
         <br>
 
-        <form action="/" class="backButton">
-          <input type="submit" value="Back" />
-        </form>
+        <form action="/" >
+          <input class="backButton" type="submit" value="Back" />
+        </form><br>
       </div>
     </div>
 
