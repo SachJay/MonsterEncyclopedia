@@ -1,0 +1,28 @@
+<% displayAbilityScore = function(name){ %>
+  <td class="statsValue"><%= name %> (<%= checkSign(parseInt((name-10)/2)) %>)</td>
+<% } %>
+
+<% checkSign = function(value){
+  if(value >= 0){
+    return "+"+value;
+  }
+
+  return "-"+value;
+} %>
+
+<% displayInfo = function(damageInfoName, displayName){
+    if(damageInfoName != ""){ %>
+      <h4 class="characterBasicInfoTitle"><%= displayName %>:</h4>
+      <p class="characterBasicInfo"><%= damageInfoName %></p><br>
+ <% }
+   } %>
+
+<% displayAllActions = function(actions, titleDisplayName){
+   if(actions != null){ %>
+    <h2 class="characterTitle"> <%= titleDisplayName %></h2><br>
+    <% actions.forEach(function(element){ %>
+      <h4 class="actionTitle"><%= element.name %></h4>
+      <p class="actionInfo"><%= element.desc %></p>
+    <% }); %>
+  <% }
+}%>

@@ -68,7 +68,7 @@ h2 {
 .actionInfo{
   margin: 0%;
   padding: 0% 3%;
-  
+
 }
 
 .actionTitle{
@@ -88,7 +88,7 @@ h2 {
   margin-left: 2%;
 }
 
-.statDiv{
+.abilityScoreTable{
   display: flex;
   margin-left: 2%;
 }
@@ -138,5 +138,3 @@ h2 {
   margin: 0%;
   padding: 0%;
 }
-
-
