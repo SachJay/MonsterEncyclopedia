@@ -6,6 +6,7 @@
   <script src="assets/javascripts/jquery.min.js"></script>
   <script src="assets/javascripts/mustache.min.js"></script>
   <script src="assets/index.js"></script>
+  <% include functions/functions.ejs %>
 </head>
 
   <body>
@@ -15,10 +16,64 @@
 
     <div id="everything">
       <div id="currentCatagory"></div>
-      <div id="info"></div>
+      <div id="info">
+        <form action="/upload" >
+          <input class="uploadButton" type="submit" value="Upload Character" />
+        </form><br>
+
+        <input class="characterTitle" value="<%= chara.name %>"></input><br>
+        <input class="characterBasicInfoTitle" value="<%= chara.size %>"></input>
+        <input class="characterBasicInfoTitle" value="<%= chara.type %>"></input>
+        <input class="characterBasicInfoTitle" value="<%= chara.alignment %>"></input><br>
+        <br>
+
+        <% displayInfoInput(chara.armor_class, "Armor Class") %>
+        <% displayInfoInput(chara.hit_points, "Hit Points") %>
+        <% displayInfoInput(chara.speed, "Speed") %>
+        <br>
+
+        <table class="abilityScoreTable">
+          <thead>
+            <th class="statsTitle">Str</th>
+            <th class="statsTitle">Dex</th>
+            <th class="statsTitle">Con</th>
+            <th class="statsTitle">Int</th>
+            <th class="statsTitle">Wis</th>
+            <th class="statsTitle">Cha</th>
+          </thead>
+          <tbody>
+            <td class="statsValue"><%= displayAbilityScoreInput(chara.strength) %></td>
+            <td class="statsValue"><%= displayAbilityScoreInput(chara.dexterity) %></td>
+            <td class="statsValue"><%= displayAbilityScoreInput(chara.constitution) %></td>
+            <td class="statsValue"><%= displayAbilityScoreInput(chara.intelligence) %></td>
+            <td class="statsValue"><%= displayAbilityScoreInput(chara.wisdom) %></td>
+            <td class="statsValue"><%= displayAbilityScoreInput(chara.charisma) %></td>
+          </tbody>
+        </table><br>
+
+        <% displayInfoInput(chara.damage_vulnerabilities, "Vunerable") %>
+        <% displayInfoInput(chara.damage_resistances, "Resistance") %>
+        <% displayInfoInput(chara.damage_immunities, "Immunities") %>
+        <% displayInfoInput(chara.condition_immunities, "Condition Immunities") %>
+        <% displayInfoInput(chara.senses, "Senses") %>
+        <% displayInfoInput(chara.languages, "Languages") %>
+        <% displayInfoInput(chara.challenge_rating, "Challenge") %>
+
+        <div id="special_abilities">
+          <% displayAllActionsInput(chara.special_abilities, "Special Abilities"); %>
+        </div>
+        <button class="addAction" type="button" name="button" onclick="addAction('#special_abilities')">Add</button><br>
+
+        <div id="actions">
+          <% displayAllActionsInput(chara.actions, "Actions"); %>
+        </div>
+        <button class="addAction" type="button" name="button" onclick="addAction('#actions')">Add</button><br>
+
+        <br>
+      </div>
     </div>
 
-    <footer>
+    <footer class="footer">
       <h3>©My Site 2019</h3>
     </footer>
   </body>

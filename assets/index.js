@@ -56,6 +56,16 @@ $(function(){
   });*/
 });
 
+var charaTemplate = "" +
+"<input type='text' class='actionTitle'></input>" +
+"<input type='text' class='actionInfo'></input><br>"
++ "<br>";
+
+function addAction(id){
+
+  $(id).append(Mustache.render(charaTemplate));
+}
+
 function displayTopics(){
   clearCurrentPage("everything", "currentCatagory");
 

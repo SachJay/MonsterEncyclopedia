@@ -26,3 +26,39 @@
     <% }); %>
   <% }
 }%>
+
+<% displayAbilityScoreInput = function(name){ %>
+  <input type="text" class="statsValue" value="<%= name %> (<%= checkSign(parseInt((name-10)/2)) %>)"></input>
+<% } %>
+
+<% checkSign = function(value){
+  if(value >= 0){
+    return "+"+value;
+  }
+
+  return value;
+} %>
+
+<% displayInfoInput = function(damageInfoName, displayName){ %>
+  <h4 type="text" class="characterBasicInfoTitle"><%= displayName %>:</h4>
+ <% if(damageInfoName != ""){ %>
+      <input type="text" class="characterBasicInfo" value="<%= damageInfoName %>"><br>
+ <% } else { %>
+      <input type="text" class="characterBasicInfo" value=""><br>
+ <% }
+   } %>
+
+<% addAction = function(){%>
+  <input class="actionTitle" value=""></input><br>
+  <input class="actionInfo" value=""></input><br><br>
+<%}%>
+
+<% displayAllActionsInput = function(actions, titleDisplayName){ %>
+    <h2 class="characterTitle"> <%= titleDisplayName %></h2><br>
+    <% if(actions != null){ %>
+    <% actions.forEach(function(element){ %>
+      <input class="actionTitle" value="<%= element.name %>"></input><br>
+      <input class="actionInfo" value="<%= element.desc %>"></input><br><br>
+    <% }); %>
+  <% }
+}%>

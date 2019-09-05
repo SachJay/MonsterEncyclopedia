@@ -9,11 +9,8 @@ app.set('view engine', 'ejs');
 app.use('/assets', express.static('assets'));
 
 app.get('/', function(req, res){
-  res.render('homepage');
-});
-
-app.get('/', function(req, res){
-  res.render('homepage');
+  var contents = fs.readFileSync(__dirname + '/assets/data.json', 'utf8');
+  res.render('homepage', {chara: JSON.parse(contents)[27]});
 });
 
 app.get('/monsters', function(req, res){
