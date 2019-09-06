@@ -17,14 +17,14 @@
     <div id="everything">
       <div id="currentCatagory"></div>
       <div id="info">
-        <form action="/upload" >
-          <input class="uploadButton" type="submit" value="Upload Character" />
-        </form><br>
 
-        <input class="characterTitle" value="<%= chara.name %>"></input><br>
-        <input class="characterBasicInfoTitle" value="<%= chara.size %>"></input>
-        <input class="characterBasicInfoTitle" value="<%= chara.type %>"></input>
-        <input class="characterBasicInfoTitle" value="<%= chara.alignment %>"></input><br>
+          <input id="add-character" class="uploadButton" type="submit" value="Upload Character" />
+        <br>
+
+        <input class="characterTitle" value="<%= chara.name %>" id="inputName"><br>
+        <input class="characterBasicInfoTitle" value="<%= chara.size %>">
+        <input class="characterBasicInfoTitle" value="<%= chara.type %>">
+        <input class="characterBasicInfoTitle" value="<%= chara.alignment %>"><br>
         <br>
 
         <% displayInfoInput(chara.armor_class, "Armor Class") %>

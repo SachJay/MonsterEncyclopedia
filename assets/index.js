@@ -1,20 +1,10 @@
 var currentPage = null;
 var currentCatagory = null;
 var fileData;
+var numOfCharacters = 0;
 
 $(function(){
-  var $characters = $('#characters');
-
-  var charaTemplate = "" +
-  "<li>" +
-  "<p><strong>Name:</strong> {{name}}<p/>" +
-  "<p><strong>Hp:</strong> {{hit_points}}<p/>" +
-  "<button data-id='{{id}}' class='remove-chara'>X</button>" +
-  "</li>";
-
-  function addChara(chara){
-    $characters.append(Mustache.render(charaTemplate, chara));
-  }
+  var $characters = $('#currentCatagory');
 
   $.ajax({
     type: 'GET',
@@ -26,11 +16,46 @@ $(function(){
       alert("Error loading page");
     }
   });
-/*
+
+  $.ajax({
+    type: 'GET',
+    url: 'http://rest.learncode.academy/api/sachinthana/friends',
+    success: function(characters){
+      fileData = characters;
+      displayTopics();
+    }, error: function(){
+      alert("Error loading page");
+    }
+  });
+
   $("#add-character").on("click", function(){
     var chara = {
-      name: $name.val(),
-      hp: $hp.val()
+      name: document.getElementById("inputName").value,
+      size: "Medium",
+      type: "humanoid",
+      subtype: "any race",
+      alignment: "any alignment",
+      armor_class: 10,
+      hit_points: 9,
+      hit_dice: "2d8",
+      speed: "30 ft.",
+      strength: 10,
+      dexterity: 10,
+      constitution: 10,
+      intelligence: 10,
+      wisdom: 14,
+      charisma: 11,
+      medicine: 4,
+      religion: 2,
+      damage_vulnerabilities: "",
+      damage_resistances: "",
+      damage_immunities: "",
+      condition_immunities: "",
+      senses: "passive Perception 12",
+      languages: "any one language (usually Common)",
+      challenge_rating: "1/4",
+      special_abilities: [],
+      actions: []
     };
 
     $.ajax({
@@ -38,7 +63,7 @@ $(function(){
       url: 'http://rest.learncode.academy/api/sachinthana/friends',
       data: chara,
       success: function(newChara){
-        addChara(newChara);
+        createTopicButton(newChara, numOfCharacters);
       }
     });
   });
@@ -53,7 +78,7 @@ $(function(){
         $li.remove();
       }
     });
-  });*/
+  });
 });
 
 var charaTemplate = "" +
@@ -62,20 +87,14 @@ var charaTemplate = "" +
 + "<br>";
 
 function addAction(id){
-
   $(id).append(Mustache.render(charaTemplate));
 }
 
 function displayTopics(){
-  clearCurrentPage("everything", "currentCatagory");
-
-  var currentCatagory = document.createElement("div");
-  currentCatagory.id = "currentCatagory";
-  document.getElementById("everything").appendChild(currentCatagory);
-
   for(var i = 0; i < fileData.length; i++){
-    createTopicButton(fileData[i], i);
+    createTopicButton(fileData[i], numOfCharacters+i);
   }
+  numOfCharacters += parseInt(fileData.length);
 }
 
 function createTopicButton(topic, i){
