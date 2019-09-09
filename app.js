@@ -1,34 +1,62 @@
 var express = require('express');
 var fetch = require('node-fetch');
 const fs = require('fs');
-
+var data = require('./assets/data.json');
 var app = express();
-var data;
 
 app.set('view engine', 'ejs');
-
 app.use('/assets', express.static('assets'));
+app.use(express.urlencoded({
+  extended: false
+}));
 
 app.get('/', function(req, res){
-  var contents = fs.readFileSync(__dirname + '/assets/data.json', 'utf8');
-  res.render('homepage', {chara: JSON.parse(contents)[27]});
+  var length = data.length;
+
+  for(var index = 0; index < length; index++) {
+    if(data[index] != null){
+      if(data[index].name == '[DELETED]'){
+        data.splice(index, 1);
+        index--;
+      } else {
+        data[index].id = index;
+      }
+    }
+  }
+
+  fs.writeFile('./assets/data.json', JSON.stringify(data), function(err) {
+    if (err) throw err;
+    console.log('Updated!');
+  });
+
+  res.render('homepage', {chara: data[0]});
 });
 
 app.get('/monsters', function(req, res){
-  var contents = fs.readFileSync(__dirname + '/assets/data.json', 'utf8');
-  res.render('monsterInfo', {chara: JSON.parse(contents)[req.query.id]});
+  res.render('monsterInfo', {chara: data[req.query.id]});
 });
 
-app.get('/upload', function(req, res){
-  fetch("http://rest.learncode.academy/api/sachinthana/friends")
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(myJson) {
-    console.log(myJson[0]);
-  // res.render('monsterInfo', {chara: myJson[0]});
+app.post('/upload', function(req, res) {
+  req.body.index = data.length;
+  data.push(req.body);
+  fs.writeFile('./assets/data.json', JSON.stringify(data), function(err) {
+    if (err) {
+     console.log("err");
+   }
+    console.log('Saved!');
   });
+  res.status(301).redirect('/');
+});
 
+app.get('/delete', function(req, res) {
+ var id = req.query.id;
+ data[id].name = '[DELETED]';
+
+ fs.writeFile('./assets/data.json', JSON.stringify(data), function(err) {
+    if (err) throw err;
+    console.log('Saved!');
+  });
+  res.status(301).redirect('/');
 });
 
 app.listen(3000, '127.0.0.1');
