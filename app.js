@@ -15,6 +15,7 @@ app.get('/', function(req, res){
 
   for(var index = 0; index < length; index++) {
     if(data[index] != null){
+      //console.log(index);
       if(data[index].name == '[DELETED]'){
         data.splice(index, 1);
         index--;
@@ -25,7 +26,10 @@ app.get('/', function(req, res){
   }
 
   fs.writeFile('./assets/data.json', JSON.stringify(data), function(err) {
-    if (err) throw err;
+    if (err) {
+      console.log("EERRR");
+      throw err;
+    }
     console.log('Updated!');
   });
 
@@ -41,6 +45,7 @@ app.post('/upload', function(req, res) {
 
   req.body = makeActionPerma(req.body, "special_abilities");
   req.body = makeActionPerma(req.body, "actions");
+  req.body = makeActionPerma(req.body, "legendary_actions");
 
   data.push(req.body);
   fs.writeFile('./assets/data.json', JSON.stringify(data), function(err) {
@@ -75,17 +80,34 @@ function makeActionPerma(body, action){
     for(var i = 0; i < length; i++){
       var tempAction = {
         name: body["temp_"+action+"_name"][i],
+        desc: body["temp_"+action+"_desc"][i],
+        attack_bonus: body["temp_"+action+"_attack_bonus"][i],
+        damage_dice: body["temp_"+action+"_damage_dice"][i],
+        damage_bonus: body["temp_"+action+"_damage_bonus"][i],
         desc: body["temp_"+action+"_desc"][i]
       };
+
+      special_abilities.push(tempAction);
     }
   } else {
     var tempAction = {
       name: body["temp_"+action+"_name"],
-      desc: body["temp_"+action+"_desc"]
+      desc: body["temp_"+action+"_desc"],
+      attack_bonus: body["temp_"+action+"_attack_bonus"],
+      damage_dice: body["temp_"+action+"_damage_dice"],
+      damage_bonus: body["temp_"+action+"_damage_bonus"],
     };
+
+    special_abilities.push(tempAction);
   }
 
-  special_abilities.push(tempAction);
+  delete body["temp_"+action+"_name"];
+  delete body["temp_"+action+"_desc"];
+  delete body["temp_"+action+"_attack_bonus"];
+  delete body["temp_"+action+"_damage_dice"];
+  delete body["temp_"+action+"_damage_bonus"];
+
+
   body[action] = special_abilities;
 
   return body;

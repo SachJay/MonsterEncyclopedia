@@ -29,6 +29,7 @@ function displayTopics(){
         }
       }
     }, error: function(){
+      console.log("Error");
       alert("Error loading page");
     }
   });
@@ -44,9 +45,15 @@ function addAction(id){
   }
   var name = jsonName+'_name';
   var desc = jsonName+'_desc';
+  var attack_bonus = jsonName+'_attack_bonus';
+  var damage_dice = jsonName+'_damage_dice';
+  var damage_bonus = jsonName+'_damage_bonus';
 
-  $(id).append("<input name="+name+" type='text' class='actionTitle'></input>");
-  $(id).append("<input name="+desc+" type='text' class='actionInfo'></input><br>");
+  $(id).append("Name:<input name="+name+" type='text' class='actionTitle'></input><br>");
+  $(id).append("Desc:<input name="+desc+" type='text' class='actionInfo'></input><br>");
+  $(id).append("Attack Bonus:<input name="+attack_bonus+" class='actionTitle'></input><br>");
+  $(id).append("Damage Dice:<input name="+damage_dice+" type='text' class='actionTitle'></input><br>");
+  $(id).append("Damage Bonus:<input name="+damage_bonus+" type='text' class='actionTitle'></input><br><br>");
 }
 
 function createTopicButton(topic, i){

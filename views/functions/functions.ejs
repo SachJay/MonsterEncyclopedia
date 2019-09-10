@@ -21,7 +21,7 @@
    if(actions != null){ %>
     <h2 class="characterTitle"> <%= titleDisplayName %></h2><br>
     <% actions.forEach(function(element){ %>
-      <h4 class="actionTitle"><%= element.name %></h4>
+      <h3 class="actionTitle"><%= element.name %></h3>
       <p class="actionInfo"><%= element.desc %></p>
     <% }); %>
   <% }
@@ -48,17 +48,15 @@
  <% }
    } %>
 
-<% addAction = function(){%>
-  <input class="actionTitle" value=""></input><br>
-  <input class="actionInfo" value=""></input><br><br>
-<%}%>
-
 <% displayAllActionsInput = function(actions, titleDisplayName, actionTempJsonName){ %>
     <h2 class="characterTitle"> <%= titleDisplayName %></h2><br>
     <% if(actions != null){ %>
     <% actions.forEach(function(element){ %>
-      <input name='<%=actionTempJsonName+"_name"%>' class="actionTitle" value="<%= element.name %>"></input><br>
-      <input name="<%=actionTempJsonName+"_desc" %>" class="actionInfo" value="<%= element.desc %>"></input><br><br>
+      Name:<input name='<%=actionTempJsonName+"_name"%>' class="actionTitle" value="<%= element.name %>"></input><br>
+      Desc:<input name="<%=actionTempJsonName+"_desc" %>" class="actionInfo" value="<%= element.desc %>"></input><br>
+      Attack Bonus:<input name='<%=actionTempJsonName+"_attack_bonus"%>' class="actionTitle" value="<%= element.attack_bonus %>"></input><br>
+      Damage Dice:<input name='<%=actionTempJsonName+"_damage_dice"%>' class="actionTitle" value="<%= element.damage_dice %>"></input><br>
+      Damage Bonus:<input name='<%=actionTempJsonName+"_damage_bonus"%>' class="actionTitle" value="<%= element.damage_bonus %>"></input><br><br>
     <% }); %>
   <% }
 }%>

@@ -71,6 +71,12 @@
             <% displayAllActionsInput(chara.actions, "Actions", "temp_actions"); %>
           </div>
           <button class="addAction" type="button" name="button" onclick="addAction('#actions')">Add</button><br>
+
+          <div id="legendary_actions">
+            <% displayAllActionsInput(chara.legendary_actions, "Legendary Actions", "temp_legendary_actions"); %>
+          </div>
+          <button class="addAction" type="button" name="button" onclick="addAction('#legendary_actions')">Add</button><br>
+
           <br>
         </form>
       </div>
