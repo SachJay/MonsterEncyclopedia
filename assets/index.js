@@ -34,13 +34,19 @@ function displayTopics(){
   });
 }
 
-var actionTemplate = "" +
-"<input type='text' class='actionTitle'></input>" +
-"<input type='text' class='actionInfo'></input><br>"
-+ "<br>";
-
 function addAction(id){
-  $(id).append(Mustache.render(actionTemplate));
+  var jsonName;
+
+  if(id == "#special_abilities"){
+    jsonName = 'temp_special_abilities';
+  } else if(id == "#actions"){
+    jsonName = 'temp_actions';
+  }
+  var name = jsonName+'_name';
+  var desc = jsonName+'_desc';
+
+  $(id).append("<input name="+name+" type='text' class='actionTitle'></input>");
+  $(id).append("<input name="+desc+" type='text' class='actionInfo'></input><br>");
 }
 
 function createTopicButton(topic, i){

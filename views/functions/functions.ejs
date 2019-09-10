@@ -1,5 +1,5 @@
 <% displayAbilityScore = function(name){ %>
-  <td class="statsValue"><%= name %> (<%= checkSign(parseInt((name-10)/2)) %>)</td>
+  <td class="statsValue"><%= chara[name] %> (<%= checkSign(parseInt((chara[name]-10)/2)) %>)</td>
 <% } %>
 
 <% checkSign = function(value){
@@ -11,9 +11,9 @@
 } %>
 
 <% displayInfo = function(damageInfoName, displayName){
-    if(damageInfoName != ""){ %>
+    if(chara[damageInfoName] != ""){ %>
       <h4 class="characterBasicInfoTitle"><%= displayName %>:</h4>
-      <p class="characterBasicInfo"><%= damageInfoName %></p><br>
+      <p name=damageInfoName class="characterBasicInfo"><%= chara[damageInfoName] %></p><br>
  <% }
    } %>
 
@@ -27,8 +27,8 @@
   <% }
 }%>
 
-<% displayAbilityScoreInput = function(name){ %>
-  <input type="text" class="statsValue" value="<%= name %> (<%= checkSign(parseInt((name-10)/2)) %>)"></input>
+<% displayAbilityScoreInput = function(statName){ %>
+  <input name="<%=statName %>"  type="text" class="statsValue" value="<%= chara[statName] %>"></input>
 <% } %>
 
 <% checkSign = function(value){
@@ -41,10 +41,10 @@
 
 <% displayInfoInput = function(damageInfoName, displayName){ %>
   <h4 type="text" class="characterBasicInfoTitle"><%= displayName %>:</h4>
- <% if(damageInfoName != ""){ %>
-      <input type="text" class="characterBasicInfo" value="<%= damageInfoName %>"><br>
+ <% if(chara[damageInfoName] != ""){ %>
+      <input name="<%=damageInfoName %>" type="text" class="characterBasicInfo" value="<%= chara[damageInfoName] %>"><br>
  <% } else { %>
-      <input type="text" class="characterBasicInfo" value=""><br>
+      <input name="<%=damageInfoName %>" type="text" class="characterBasicInfo" value=""><br>
  <% }
    } %>
 
@@ -53,12 +53,12 @@
   <input class="actionInfo" value=""></input><br><br>
 <%}%>
 
-<% displayAllActionsInput = function(actions, titleDisplayName){ %>
+<% displayAllActionsInput = function(actions, titleDisplayName, actionTempJsonName){ %>
     <h2 class="characterTitle"> <%= titleDisplayName %></h2><br>
     <% if(actions != null){ %>
     <% actions.forEach(function(element){ %>
-      <input class="actionTitle" value="<%= element.name %>"></input><br>
-      <input class="actionInfo" value="<%= element.desc %>"></input><br><br>
+      <input name='<%=actionTempJsonName+"_name"%>' class="actionTitle" value="<%= element.name %>"></input><br>
+      <input name="<%=actionTempJsonName+"_desc" %>" class="actionInfo" value="<%= element.desc %>"></input><br><br>
     <% }); %>
   <% }
 }%>

@@ -19,7 +19,7 @@ app.get('/', function(req, res){
         data.splice(index, 1);
         index--;
       } else {
-        data[index].id = index;
+        data[index].index = index;
       }
     }
   }
@@ -38,6 +38,10 @@ app.get('/monsters', function(req, res){
 
 app.post('/upload', function(req, res) {
   req.body.index = data.length;
+
+  req.body = makeActionPerma(req.body, "special_abilities");
+  req.body = makeActionPerma(req.body, "actions");
+
   data.push(req.body);
   fs.writeFile('./assets/data.json', JSON.stringify(data), function(err) {
     if (err) {
@@ -61,3 +65,28 @@ app.get('/delete', function(req, res) {
 
 app.listen(3000, '127.0.0.1');
 console.log("Now listening to port 3000");
+
+function makeActionPerma(body, action){
+  var special_abilities = [];
+
+  if(Array.isArray(body["temp_"+action+"_name"])){
+    var length = body["temp_"+action+"_name"].length;
+
+    for(var i = 0; i < length; i++){
+      var tempAction = {
+        name: body["temp_"+action+"_name"][i],
+        desc: body["temp_"+action+"_desc"][i]
+      };
+    }
+  } else {
+    var tempAction = {
+      name: body["temp_"+action+"_name"],
+      desc: body["temp_"+action+"_desc"]
+    };
+  }
+
+  special_abilities.push(tempAction);
+  body[action] = special_abilities;
+
+  return body;
+}

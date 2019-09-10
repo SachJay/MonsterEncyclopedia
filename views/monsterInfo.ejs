@@ -20,9 +20,9 @@
         <h4 class="characterBasicInfoTitle"><%= chara.size %>, <%= chara.type %>, <%= chara.alignment %></h4><br>
         <br>
 
-        <% displayInfo(chara.armor_class, "Armor Class") %>
-        <% displayInfo(chara.hit_points, "Hit Points") %>
-        <% displayInfo(chara.speed, "Speed") %>
+        <% displayInfo("armor_class", "Armor Class") %>
+        <% displayInfo("hit_points", "Hit Points") %>
+        <% displayInfo("speed", "Speed") %>
         <br>
 
         <table class="abilityScoreTable">
@@ -35,22 +35,22 @@
             <th class="statsTitle">Cha</th>
           </thead>
           <tbody>
-            <td class="statsValue"><%= displayAbilityScore(chara.strength) %></td>
-            <td class="statsValue"><%= displayAbilityScore(chara.dexterity) %></td>
-            <td class="statsValue"><%= displayAbilityScore(chara.constitution) %></td>
-            <td class="statsValue"><%= displayAbilityScore(chara.intelligence) %></td>
-            <td class="statsValue"><%= displayAbilityScore(chara.wisdom) %></td>
-            <td class="statsValue"><%= displayAbilityScore(chara.charisma) %></td>
+            <td class="statsValue"><%= displayAbilityScore("strength") %></td>
+            <td class="statsValue"><%= displayAbilityScore("dexterity") %></td>
+            <td class="statsValue"><%= displayAbilityScore("constitution") %></td>
+            <td class="statsValue"><%= displayAbilityScore("intelligence") %></td>
+            <td class="statsValue"><%= displayAbilityScore("wisdom") %></td>
+            <td class="statsValue"><%= displayAbilityScore("charisma") %></td>
           </tbody>
         </table><br>
 
-        <% displayInfo(chara.damage_vulnerabilities, "Vunerable") %>
-        <% displayInfo(chara.damage_resistances, "Resistance") %>
-        <% displayInfo(chara.damage_immunities, "Immunities") %>
-        <% displayInfo(chara.condition_immunities, "Condition Immunities") %>
-        <% displayInfo(chara.senses, "Senses") %>
-        <% displayInfo(chara.languages, "Languages") %>
-        <% displayInfo(chara.challenge_rating, "Challenge") %>
+        <% displayInfo("damage_vulnerabilities", "Vunerable") %>
+        <% displayInfo("damage_resistances", "Resistance") %>
+        <% displayInfo("damage_immunities", "Immunities") %>
+        <% displayInfo("condition_immunities", "Condition Immunities") %>
+        <% displayInfo("senses", "Senses") %>
+        <% displayInfo("languages", "Languages") %>
+        <% displayInfo("challenge_rating", "Challenge") %>
 
         <% displayAllActions(chara.special_abilities, "Special Abilities"); %>
         <% displayAllActions(chara.actions, "Actions"); %>
