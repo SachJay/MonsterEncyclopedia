@@ -1,7 +1,7 @@
 var express = require('express');
 var fetch = require('node-fetch');
 const fs = require('fs');
-var data = require('./assets/data.json');
+var data = require('./assets/dataTest.json');
 var app = express();
 
 app.set('view engine', 'ejs');
@@ -25,7 +25,7 @@ app.get('/', function(req, res){
     }
   }
 
-  fs.writeFile('./assets/data.json', JSON.stringify(data), function(err) {
+  fs.writeFile('./assets/dataTest.json', JSON.stringify(data), function(err) {
     if (err) {
       console.log("EERRR");
       throw err;
@@ -33,7 +33,15 @@ app.get('/', function(req, res){
     console.log('Updated!');
   });
 
-  res.render('homepage', {chara: data[0]});
+  var id;
+
+  if(req.query.id == null){
+    id = 0;
+  } else {
+    id = req.query.id;
+  }
+
+  res.render('homepage', {chara: data[id]});
 });
 
 app.get('/monsters', function(req, res){
@@ -41,27 +49,40 @@ app.get('/monsters', function(req, res){
 });
 
 app.post('/upload', function(req, res) {
-  req.body.index = data.length;
+  var edit = true;
+
+  if(req.body.submit == "Upload Character"){
+      req.body.index = data.length;
+      edit = false;
+  }
+
+  delete req.body["submit"];
 
   req.body = makeActionPerma(req.body, "special_abilities");
   req.body = makeActionPerma(req.body, "actions");
   req.body = makeActionPerma(req.body, "legendary_actions");
 
   data.push(req.body);
-  fs.writeFile('./assets/data.json', JSON.stringify(data), function(err) {
+  fs.writeFile('./assets/dataTest.json', JSON.stringify(data), function(err) {
     if (err) {
      console.log("err");
    }
     console.log('Saved!');
   });
-  res.status(301).redirect('/');
+
+  if(edit){
+    res.status(301).redirect('/delete?id='+req.body.index);
+  } else {
+    res.status(301).redirect('/');
+  }
+
 });
 
 app.get('/delete', function(req, res) {
  var id = req.query.id;
  data[id].name = '[DELETED]';
 
- fs.writeFile('./assets/data.json', JSON.stringify(data), function(err) {
+ fs.writeFile('./assets/dataTest.json', JSON.stringify(data), function(err) {
     if (err) throw err;
     console.log('Saved!');
   });
@@ -70,6 +91,7 @@ app.get('/delete', function(req, res) {
 
 app.listen(3000, '127.0.0.1');
 console.log("Now listening to port 3000");
+
 
 function makeActionPerma(body, action){
   var special_abilities = [];

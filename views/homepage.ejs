@@ -23,7 +23,11 @@
       <div id="info">
 
         <form class="ImportForm" action="/upload" method="post">
-          <input id="add-character" class="uploadButton" type="submit" value="Upload Character" /><br>
+          <input id="add-character" name="submit" class="uploadButton" type="submit" value="Upload Character" /><br>
+          <input id="add-character-edit" name="submit" class="uploadButton" type="submit" value="Edit Character" /><br>
+
+          <input name="index" class="characterBasicInfoTitle" type="hidden" value="<%= chara.index %>">
+
           <input name="name" class="characterTitle" value="<%= chara.name %>" id="inputName"><br>
           <input name="size" class="characterBasicInfoTitle" value="<%= chara.size %>">
           <input name="type" class="characterBasicInfoTitle" value="<%= chara.type %>">
@@ -65,7 +69,7 @@
           <div id="special_abilities">
             <% displayAllActionsInput(chara.special_abilities, "Special Abilities", "temp_special_abilities"); %>
           </div>
-          <button class="addAction" type="button" name="button" onclick="addAction('#special_abilities')">Add</button><br>
+          <button class="addAction" type="button" name="button" onclick= "addAction('#special_abilities')">Add</button><br>
 
           <div id="actions">
             <% displayAllActionsInput(chara.actions, "Actions", "temp_actions"); %>
